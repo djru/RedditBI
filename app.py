@@ -51,10 +51,11 @@ def oauth_callback():
             # TODO EMAILER
             return render_template('callback.html', code=code, state=state, name=name, email=email)
         else:
-            # log
+            # TODO log this
             return 'error, user already registered'
     else:
         return 'error, already submitted'
+        # TODO redirect home with banner
 
 
 if __name__ == '__main__':

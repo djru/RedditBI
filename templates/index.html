@@ -113,15 +113,15 @@
       }
     </style>
 </head>
-
+<!--    TODO spin css out-->
 <body>
   <header><a href="/"><h1>RedditBI</h1></a></header>
 <main>
     <div id="cta">Protect your reddit account from malicious downvoting.</div>
-    <div id="form">
-        <input type="email" id="form-email" placeholder="email">
-        <button class="disabled" id="go" disabled>Activate for Your Reddit Account</button>
-    </div>
+    <form id="form" action="/go">
+        <input name="email" type="email" id="form-email" placeholder="email">
+        <input type="submit" class="disabled" id="go" disabled value="Activate for Your Reddit Account"></input>
+    </form>
 
 </main>
 <div id="blurb">
