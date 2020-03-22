@@ -1,0 +1,149 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>RedditBI</title>
+  <meta name="description" content="Reddit Brigade Insurance">
+  <meta name="author" content="JDRus">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;800&display=swap" rel="stylesheet">
+  <!--  <link rel="stylesheet" href="css/styles.css?v=1.0">-->
+    <style>
+         html, body{
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            font-family: 'Baloo 2', sans;
+        }
+        header h1 {
+            font-weight: bold;
+            margin: 0 0 0 2%;
+            color: #00b7ff;;
+        }
+        header {
+            border-bottom: 1px solid #dedede;
+        }
+        header a{
+            text-decoration: none;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30rem;
+            background: radial-gradient(circle, rgb(255, 252, 241) 0%, rgba(255,255,255,1) 63%);
+        }
+        div#cta {
+            font-size: 4em;
+            max-width: 33%;
+            line-height: 1.2em;
+            text-align: right;
+            margin-right: 2%;
+        }
+        #go {
+            color: white;
+            background: #b0f4ff;
+            font-size: 2em;
+            width: 107%;
+            text-align: center;
+            border-radius: 14px;
+            text-decoration: none;
+            padding: 1rem;
+            margin-left: 5%;
+            display: block;
+            user-select: none;
+                border: none;
+            cursor: pointer;
+        }
+        #go[disabled]{
+            cursor: not-allowed;
+        }
+        #blurb {
+            background: #e4fbff;
+            padding: 2% 20%;
+            font-size: 1.5em;
+        }
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+        #form-email {
+          padding: 1rem;
+          margin-left: 5%;
+          font-size: 2em;
+          display: block;
+          width: 100%;
+          margin-bottom: 6%;
+        }
+        #form {
+          display: block;
+          width: 40%;
+            max-width: 500px;
+        }
+        #code-container{
+          max-width: 60%;
+          margin: 0 auto;
+          margin-top: 0px;
+          background: #d5d5d5;
+          margin-top: 3%;
+          padding: 2%;
+          font-size: 1.3em;
+        }
+        .code {
+            font-family: monospace;
+        }
+      #text h2{
+        color: #98ff98;
+        text-align: center;
+        margin-bottom: 0;
+        font-size: 6em;
+        text-align: center;
+        line-height: 1em;
+      }
+      #text h3{
+        font-size: 1.5em;
+        text-align: center;
+        line-height: 1.1em;
+        max-width: 60%;
+        margin: 0 auto;
+      }
+    </style>
+</head>
+
+<body>
+  <header><a href="/"><h1>RedditBI</h1></a></header>
+<main>
+    <div id="cta">Protect your reddit account from malicious downvoting.</div>
+    <div id="form">
+        <input type="email" id="form-email" placeholder="email">
+        <button class="disabled" id="go" disabled>Activate for Your Reddit Account</button>
+    </div>
+
+</main>
+<div id="blurb">
+        RedditBI (aka RedditBrigadeInsurance) is a bot that will watch your reddit account and delete any comments that fall below a certain score (typically -1). This protects your valuable karma in the event you get targeted in a brigade. (Or if you just post something poeple don't like).
+    </div>
+<div id="footer">Made with 🍺 in Chicago</div>
+</body>
+<script>
+    const input = document.querySelector('#form-email')
+    const button = document.querySelector('#go')
+    input.addEventListener('keyup', (e) => {
+        console.log('kup', e)
+        if(e.target.value.match(/[\w\.]+@\w+\.\w{2,4}/g)){
+            button.disabled = false
+        }
+        else{
+            button.disabled = true
+        }
+    })
+    button.addEventListener('click', (e) => {
+        const email = input.value
+        window.location.href = `/go?email=${encodeURIComponent(email)}`
+    })
+</script>
+</html>

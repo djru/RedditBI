@@ -1,0 +1,132 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>RedditBI</title>
+  <meta name="description" content="Reddit Brigade Insurance">
+  <meta name="author" content="JDRus">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;800&display=swap" rel="stylesheet">
+  <!--  <link rel="stylesheet" href="css/styles.css?v=1.0">-->
+    <style>
+         html, body{
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            font-family: 'Baloo 2', sans;
+        }
+        header h1 {
+            font-weight: bold;
+            margin: 0 0 0 2%;
+            color: #00b7ff;;
+        }
+        header {
+            border-bottom: 1px solid #dedede;
+        }
+        header a{
+            text-decoration: none;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30rem;
+            background: radial-gradient(circle, rgb(255, 252, 241) 0%, rgba(255,255,255,1) 63%);
+        }
+        div#cta {
+            font-size: 4em;
+            max-width: 33%;
+            line-height: 1.2em;
+            text-align: right;
+            margin-right: 2%;
+        }
+        #go {
+            color: white;
+            background: #b0f4ff;
+            font-size: 2em;
+            width: 107%;
+            text-align: center;
+            border-radius: 14px;
+            text-decoration: none;
+            padding: 1rem;
+            margin-left: 5%;
+            display: block;
+            user-select: none;
+                border: none;
+            cursor: pointer;
+        }
+        #go[disabled]{
+            cursor: not-allowed;
+        }
+        #blurb {
+            background: #e4fbff;
+            padding: 2% 20%;
+            font-size: 1.5em;
+        }
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+        #form-email {
+          padding: 1rem;
+          margin-left: 5%;
+          font-size: 2em;
+          display: block;
+          width: 100%;
+          margin-bottom: 6%;
+        }
+        #form {
+          display: block;
+          width: 40%;
+            max-width: 500px;
+        }
+        #code-container{
+          max-width: 60%;
+          margin: 0 auto;
+          margin-top: 0px;
+          background: #d5d5d5;
+          margin-top: 3%;
+          padding: 2%;
+          font-size: 1.3em;
+        }
+        .code {
+            font-family: monospace;
+        }
+      #text h2{
+        color: #98ff98;
+        text-align: center;
+        margin-bottom: 0;
+        font-size: 6em;
+        text-align: center;
+        line-height: 1em;
+      }
+      #text h3{
+        font-size: 1.5em;
+        text-align: center;
+        line-height: 1.1em;
+        max-width: 60%;
+        margin: 0 auto;
+      }
+
+    </style>
+</head>
+
+<body>
+  <header><a href="/"><h1>RedditBI</h1></a></header>
+<main>
+  <div id="text">
+    <h2>Success</h2>
+   <h3>You have successfully authenticated with reddit and are now signed up for RedditBI</h3>
+  <div id="code-container">
+    <div class="code">name: {{name}}</div>
+    <div class="code">email: {{email}}</div>
+  <div class="code">code: N-1PObmGrknTr59LGPXprZmHwCk</div> <div class="code">state: 87n48yjvejzq</div></div>
+</div>
+</main>
+<div id="footer">Made with 🍺 in Chicago</div>
+</body>
+</html>
