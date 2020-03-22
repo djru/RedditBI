@@ -36,7 +36,7 @@ for user in db.get_all_users():
     succ = delete(user.get('token'), user.get('name'))
     if not succ:
         logger.info(f'[{user.get("name")}] token expired, requesting a new one...')
-        token = token_manager.refresh_token(user.get('id'), user.get('refresh_token'))
+        token = token_manager.refresh_token(user.get('name'))
         delete(token, user.get('name'))
 
 

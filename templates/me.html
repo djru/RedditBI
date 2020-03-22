@@ -1,0 +1,13 @@
+{% extends 'container.html' %}
+{% block body %}
+<main>
+  <div id="text">
+   <h3>u/{{name}}</h3>
+  <div id="code-container">
+    <div class="code">name: {{name}}</div>
+    <div class="code">email: {{email}}</div>
+      <div><a href="/delete">Deactivate My Account</a></div>
+  </div>
+</div>
+</main>
+{% endblock %}

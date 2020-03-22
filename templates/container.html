@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>RedditBI</title>
+  <meta name="description" content="Reddit Brigade Insurance">
+  <meta name="author" content="JDRus">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+<div id="warn" style="display: none;"></div>
+  <header><a href="/"><h1>RedditBI</h1></a><div id="links">{% if not logged_in %}<a href="/login">Log In</a>{% else %}<a href="/me">My Account</a><a href="/logout">Log Out</a>{% endif %}</div></header>
+{% block body %}
+{% endblock %}
+<div id="footer">Made with 🍺 in Chicago</div>
+</body>
+<script>
+    const banner = document.querySelector('#warn')
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get('msg')
+    if (msg) {
+        banner.style.display = 'block'
+        banner.innerHTML = msg
+    }
+</script>
+</html>

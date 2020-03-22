@@ -81,6 +81,13 @@ def delete_user_by_id(id):
         c.execute(select_sql, (id,))
         conn.commit()
 
+def delete_user_by_name(name):
+    with sqlite3.connect(SQLITE_FILE) as conn:
+        select_sql = "DELETE FROM Users WHERE name=?"
+        c = conn.cursor()
+        c.execute(select_sql, (name,))
+        conn.commit()
+
 def get_user_by_name(name):
     with sqlite3.connect(SQLITE_FILE) as conn:
         select_sql = "SELECT * FROM Users WHERE name=?"
