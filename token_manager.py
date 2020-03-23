@@ -23,11 +23,7 @@ def request_token(code):
         logger.info(f'requested token from server and got {token} (refresh token: {refresh})')
     return (token, refresh)
 
-def refresh_token(name):
-    user = db.get_user_by_name(name)
-    if user is None:
-        logger.warning(f'requested a refreshed token for user name {name} but no user exists!')
-        return None
+def refresh_token(user):
     req_data = {
         'grant_type': 'refresh_token',
         'refresh_token': user.get('refresh_token')
@@ -35,7 +31,7 @@ def refresh_token(name):
     resp = requests.post('https://www.reddit.com/api/v1/access_token', data=req_data, auth=(CLIENT_ID, CLIENT_SECRET), headers={'User-Agent': USER_AGENT})
     resp = resp.json()
     token = resp.get('access_token')
-    logger.info(f'requested a refreshed token from the server and got: {token}')
+    logger.info(f'[user {user.get("name")}] requested a refreshed token from the server and got: {token}')
     db.update_user(user.get('id'), ('token',), (token,))
     return token
 

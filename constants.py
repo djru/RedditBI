@@ -11,6 +11,7 @@ GMAIL_PASSWORD = os.environ.get('GMAIL_PASSWORD')
 JWT_SECRET = os.environ.get('JWT_SECRET')
 REDIS_URL = 'localhost'
 if ENV == 'DEV':
-    REDIRECT_URI = 'http://127.0.0.1:8888/oauth_callback'
+    APP_URL = 'http://127.0.0.1:8888'
 elif ENV == 'PROD':
-    REDIRECT_URI = 'http://redditbi.com/oauth_callback'
+    APP_URL = 'https://redditbi.com'
+REDIRECT_URI = f'{APP_URL}/oauth_callback'

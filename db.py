@@ -6,7 +6,7 @@ import time
 # https://sqlitebrowser.org/
 
 # https://stackoverflow.com/questions/48218065/programmingerror-sqlite-objects-created-in-a-thread-can-only-be-used-in-that-sa
-cols = ('id', 'state', 'code', 'token', 'refresh_token', 'name', 'email', 'updated')
+cols = ('id', 'state', 'code', 'token', 'refresh_token', 'name', 'email', 'deleted_count', 'confirmed', 'updated')
 
 def create_table():
     with sqlite3.connect(SQLITE_FILE) as conn:
@@ -19,6 +19,8 @@ def create_table():
                                    refresh_token TEXT,
                                    name TEXT UNIQUE,
                                    email TEXT UNIQUE,
+                                   deleted_count INTEGER DEFAULT 0,
+                                   confirmed TEXT,
                                    updated INTEGER
                                 );"""
         create_nameindex_sql = """CREATE UNIQUE INDEX IF NOT EXISTS name 
@@ -31,6 +33,7 @@ def create_table():
         c.execute(create_table_sql)
         c.execute(create_nameindex_sql)
         c.execute(create_stateindex_sql)
+        c.execute(create_codeindex_sql)
         conn.commit()
 
 def create_user(state, code):
