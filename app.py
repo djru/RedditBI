@@ -37,6 +37,12 @@ def authenticate(fn):
 
 @application.route('/')
 def home():
+    jwt_token = request.cookies.get('jwt_token')
+    if jwt_token:
+        decoded = jwt.decode(jwt_token, JWT_SECRET, algorithms=['HS256'])
+        user = db.get_user_by_name(decoded.get('name'))
+        if user:
+            return redirect('/me')
     return render_template('index.html', logged_in=False)
 
 
