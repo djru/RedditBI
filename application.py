@@ -79,7 +79,7 @@ def oauth_callback():
     if '_signup' in state:
         email = session.get('email')
         if state != session.get('state') or email != session.get('email'):
-            return 'something went wrong'
+            return f"{state}, {session.get('state')}, {email}, {session.get('email')}"
         if user:
             encoded = jwt.encode({'name': user.get('name'), 'email': user.get('email')}, JWT_SECRET, algorithm='HS256')
             resp = make_response(redirect('/me'))
