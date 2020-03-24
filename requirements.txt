@@ -2,3 +2,4 @@ PyJWT
 requests
 flask
 uwsgi
+newrelic

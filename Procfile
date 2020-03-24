@@ -1,1 +1,1 @@
-web: uwsgi --ini config.ini
+web: newrelic-admin run-program uwsgi --ini config.ini
