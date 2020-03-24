@@ -1,13 +1,15 @@
 from flask import Flask, redirect, render_template, send_from_directory, make_response, session
 from flask import request
 import webbrowser
-from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, JWT_SECRET
+from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, JWT_SECRET, ENV
 from helpers import make_rand
 import db
 import token_manager
 import email_manager
 import jwt
 import urllib
+if ENV == 'PROD':
+    from scout_apm.flask import ScoutApm
 
 db.create_table()
 
@@ -145,6 +147,10 @@ def confirm():
 def send_confirm(user):
     email_manager.send_welcome(user.get('email'), user.get('name'), user.get('state'))
     return redirect(f'/me?msg={urllib.parse.quote("Email Resent")}')
+
+
+if ENV == 'PROD':
+    ScoutApm(application)
 
 if __name__ == '__main__':
     webbrowser.open('127.0.0.1:8888', new=2)

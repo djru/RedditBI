@@ -2,4 +2,4 @@ PyJWT
 requests
 flask
 uwsgi
-newrelic
+scout-apm
