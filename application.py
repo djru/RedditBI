@@ -55,7 +55,7 @@ def go():
     email = request.args.get('email')
     state = make_rand()
     session['email'] = email
-    session['state'] = state
+    session['state'] = f'{state}_signup'
     return render_template('redirect.html', url=f'https://www.reddit.com/api/v1/authorize?client_id={CLIENT_ID}&response_type=code&state={state}_signup&redirect_uri={REDIRECT_URI}&duration=permanent&scope={SCOPE}')
 
 @application.route('/login')
@@ -79,7 +79,7 @@ def oauth_callback():
     if '_signup' in state:
         email = session.get('email')
         if state != session.get('state') or email != session.get('email'):
-            return f"{state}, {session.get('state')}, {email}, {session.get('email')}"
+            return 'something went wrong'
         if user:
             encoded = jwt.encode({'name': user.get('name'), 'email': user.get('email')}, JWT_SECRET, algorithm='HS256')
             resp = make_response(redirect('/me'))
