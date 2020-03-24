@@ -5,7 +5,6 @@ from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, JWT_SECRET
 from helpers import make_rand
 import db
 import token_manager
-import redis
 import email_manager
 import jwt
 import urllib

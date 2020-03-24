@@ -4,10 +4,11 @@ import token_manager
 import db
 import time
 
+db.create_table()
+
 from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, USER_AGENT
 
 # https://stackoverflow.com/questions/6386698/how-to-write-to-a-file-using-the-logging-python-module
-
 
 def delete(user):
     token = user.get('token')
