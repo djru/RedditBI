@@ -10,6 +10,8 @@ import email_manager
 import jwt
 import urllib
 
+db.create_table()
+
 # https://uwsgi-docs.readthedocs.io/en/latest/AttachingDaemons.html
 
 application = Flask(__name__, static_url_path='/static', static_folder='static')
