@@ -77,6 +77,7 @@ def oauth_callback():
     name = token_manager.whoami(t)
     user = db.get_user_by_name(name)
     if '_signup' in state:
+        email = session.get('email')
         if state != session.get('state') or email != session.get('email'):
             return 'something went wrong'
         if user:
@@ -84,7 +85,6 @@ def oauth_callback():
             resp = make_response(redirect('/me'))
             resp.set_cookie('jwt_token', encoded)
             return resp
-        email = session.get('email')
         # TODO create and update in one
         id = db.create_user(state, code)
         db.update_user(id, ('token', 'refresh_token', 'name', 'email'), (t, r, name, email))
