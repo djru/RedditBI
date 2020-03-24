@@ -13,5 +13,5 @@ REDIS_URL = 'localhost'
 if ENV == 'DEV':
     APP_URL = 'http://127.0.0.1:8888'
 elif ENV == 'PROD':
-    APP_URL = 'https://redditbi.com'
+    APP_URL = os.environ.get('APP_URL', 'https://redditbi.com')
 REDIRECT_URI = f'{APP_URL}/oauth_callback'

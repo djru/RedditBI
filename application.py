@@ -1,7 +1,7 @@
-from flask import Flask, redirect, render_template, send_from_directory, make_response
+from flask import Flask, redirect, render_template, send_from_directory, make_response, session
 from flask import request
 import webbrowser
-from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, REDIS_URL, JWT_SECRET
+from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, JWT_SECRET
 from helpers import make_rand
 import db
 import token_manager
@@ -10,8 +10,10 @@ import email_manager
 import jwt
 import urllib
 
+# https://uwsgi-docs.readthedocs.io/en/latest/AttachingDaemons.html
+
 application = Flask(__name__, static_url_path='/static', static_folder='static')
-redis = r = redis.Redis(host=REDIS_URL, port=6379, db=0, decode_responses=True)
+application.secret_key = JWT_SECRET
 
 # decorator that wraps protected endpoints
 def authenticate(fn):
@@ -51,9 +53,9 @@ def home():
 def go():
     email = request.args.get('email')
     state = make_rand()
-    # TODO redis expiration
-    redis.set(f'{state}_signup', email)
-    return redirect(f'https://www.reddit.com/api/v1/authorize?client_id={CLIENT_ID}&response_type=code&state={state}_signup&redirect_uri={REDIRECT_URI}&duration=permanent&scope={SCOPE}')
+    session['email'] = email
+    session['state'] = state
+    return render_template('redirect.html', url=f'https://www.reddit.com/api/v1/authorize?client_id={CLIENT_ID}&response_type=code&state={state}_signup&redirect_uri={REDIRECT_URI}&duration=permanent&scope={SCOPE}')
 
 @application.route('/login')
 def login():
@@ -74,16 +76,14 @@ def oauth_callback():
     name = token_manager.whoami(t)
     user = db.get_user_by_name(name)
     if '_signup' in state:
+        if state != session.get('state') or email != session.get('email'):
+            return 'something went wrong'
         if user:
             encoded = jwt.encode({'name': user.get('name'), 'email': user.get('email')}, JWT_SECRET, algorithm='HS256')
             resp = make_response(redirect('/me'))
             resp.set_cookie('jwt_token', encoded)
             return resp
-        email = redis.get(state)
-        redis.delete(state)
-        if not email:
-            return 'signup expired'
-
+        email = session.get('email')
         # TODO create and update in one
         id = db.create_user(state, code)
         db.update_user(id, ('token', 'refresh_token', 'name', 'email'), (t, r, name, email))

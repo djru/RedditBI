@@ -2,6 +2,7 @@ import requests
 from log_manager import logger
 import token_manager
 import db
+import time
 
 from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, USER_AGENT
 
@@ -33,13 +34,16 @@ def delete(user):
     return True
 
 
-for user in db.get_all_users():
-    # perform delete and retry if the token is expired
-    succ = delete(user)
-    if not succ:
-        logger.info(f'[{user.get("name")}] token expired, requesting a new one...')
-        token = token_manager.refresh_token(user)
-        user['token'] = token
-        delete(user)
+if __name__ == '__main__':
+    while True:
+        for user in db.get_all_users():
+            # perform delete and retry if the token is expired
+            succ = delete(user)
+            if not succ:
+                logger.info(f'[{user.get("name")}] token expired, requesting a new one...')
+                token = token_manager.refresh_token(user)
+                user['token'] = token
+                delete(user)
+        time.sleep(60)
 
 

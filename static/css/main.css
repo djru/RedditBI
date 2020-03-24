@@ -4,6 +4,8 @@ html, body{
         }
         body {
             font-family: 'Baloo 2', sans;
+            background: rgb(242,241,255);
+            background: linear-gradient(347deg, rgba(242,241,255,1) 0%, rgba(241,252,255,1) 100%);
         }
         header h1 {
             font-weight: bold;
@@ -16,6 +18,7 @@ html, body{
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: white;
         }
         header a{
             text-decoration: none;
@@ -35,18 +38,20 @@ html, body{
             justify-content: center;
             align-items: center;
             height: 30rem;
-            background: radial-gradient(circle, rgb(255, 252, 241) 0%, rgba(255,255,255,1) 63%);
+            /*background: radial-gradient(circle, rgb(255, 252, 241) 0%, rgba(255,255,255,1) 63%);*/
         }
         div#cta {
             font-size: 4em;
-            max-width: 33%;
+            max-width: 36%;
             line-height: 1.2em;
             text-align: right;
             margin-right: 2%;
+            font-weight: 600;
+            color: #1e3a52;
         }
         #go {
             color: white;
-            background: #b0f4ff;
+            background: #00b7ff;
             font-size: 2em;
             width: 107%;
             text-align: center;
@@ -63,9 +68,10 @@ html, body{
             cursor: not-allowed;
         }
         #blurb {
-            background: #e4fbff;
+            background: #fdffe4;
             padding: 2% 20%;
             font-size: 1.5em;
+            box-shadow: 0px 0px 2px #dedede;
         }
         #footer {
             position: fixed;

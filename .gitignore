@@ -1,2 +1,3 @@
 *.db
 *.log
+set_const.sh
