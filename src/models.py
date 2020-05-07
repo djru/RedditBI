@@ -1,4 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
+import time
+
+timestamp = lambda: int(time.time())
+
 
 db = SQLAlchemy()
 # https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/?highlight=create_all#flask_sqlalchemy.BaseQuery
@@ -13,7 +17,7 @@ class User(db.Model):
     email = db.Column('email', db.String, unique=True)
     deleted_count = db.Column('deleted_count', db.Integer, default=0)
     confirmed = db.Column('text', db.String)
-    updated = db.Column('updated', db.Integer)
+    updated = db.Column('updated', db.Integer, default=timestamp, onupdate=timestamp)
 
 # TODO migrations
 

@@ -28,7 +28,7 @@ def delete_comments(user):
                 logger.info(resp.content)
     user.deleted_count = user.deleted_count + len(comments)
     db.session.commit()
-    logger.info(f'[{user.get("name")}] deleted {len(comments)} comments')
+    logger.info(f'[{user.name}] deleted {len(comments)} comments')
 
     return True
 
