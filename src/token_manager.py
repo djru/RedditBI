@@ -1,6 +1,6 @@
 import requests
 from log_manager import logger
-import db
+from models import db, User
 
 from constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE, USER_AGENT
 
@@ -26,13 +26,12 @@ def request_token(code):
 def refresh_token(user):
     req_data = {
         'grant_type': 'refresh_token',
-        'refresh_token': user.get('refresh_token')
+        'refresh_token': user.refresh_token
     }
     resp = requests.post('https://www.reddit.com/api/v1/access_token', data=req_data, auth=(CLIENT_ID, CLIENT_SECRET), headers={'User-Agent': USER_AGENT})
     resp = resp.json()
     token = resp.get('access_token')
-    logger.info(f'[user {user.get("name")}] requested a refreshed token from the server and got: {token}')
-    db.update_user(user.get('id'), ('token',), (token,))
+    logger.info(f'[user {user.name}] requested a refreshed token from the server and got: {token}')
     return token
 
 def whoami(t):
