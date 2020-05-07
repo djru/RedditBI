@@ -1,0 +1,15 @@
+{% extends 'container.html' %}
+{% block body %}
+<main>
+  <div id="text">
+   <h3>u/{{name}}</h3>
+  <div id="code-container">
+    <div class="code">name: {{user.name}}</div>
+    <div class="code">deleted comments: {{user.deleted_count}}</div>
+    <div class="code">email: {{user.email}} {% if not user.confirmed %}(unconfirmed){% endif %}</div>
+    {% if not user.confirmed %}<a href="/send_confirm">Click here to send email confirmation again</a>{% endif %}
+      <div><a href="/delete">Deactivate My Account</a></div>
+  </div>
+</div>
+</main>
+{% endblock %}
