@@ -23,7 +23,7 @@ def delete(user):
         if s < -1:
             logger.info(f'deleting post {id} with score {s}')
             data = {'id': 't1_{id'}
-            resp = requests.get('https://oauth.reddit.com/api/del', headers=headers)
+            resp = requests.post('https://oauth.reddit.com/api/del', headers=headers, json=data)
             logger.info(resp.status_code)
             try:
                 logger.info(resp.json())
