@@ -1,3 +1,4 @@
 *.db
 *.log
 set_const.sh
+start.sh

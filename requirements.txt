@@ -2,4 +2,5 @@ PyJWT
 requests
 flask
 uwsgi
-scout-apm
+sqlalchemy
+sendgrid
